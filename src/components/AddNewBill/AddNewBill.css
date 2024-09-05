@@ -1,0 +1,59 @@
+.add-new-bill-page {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .add-new-bill-page h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .add-new-bill-page form div {
+    margin-bottom: 15px;
+  }
+  
+  .add-new-bill-page label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .add-new-bill-page input[type="text"],
+  .add-new-bill-page input[type="number"],
+  .add-new-bill-page input[type="date"],
+  .add-new-bill-page select,
+  .add-new-bill-page textarea {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  
+  .add-new-bill-page textarea {
+    resize: vertical;
+  }
+  
+  .add-new-bill-page button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .add-new-bill-page button:hover {
+    background-color: #45a049;
+  }
+  
+  .success-message {
+    margin-top: 20px;
+    color: green;
+    text-align: center;
+    font-weight: bold;
+  }
+  
