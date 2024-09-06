@@ -3,7 +3,7 @@ import { BillsContext } from '../../context/BillsContext';
 
 const ReminderSettings = () => {
   const { bills, updateReminderSettings } = useContext(BillsContext);
-  const [selectedCategory, setSelectedCategory] = useState('');
+ 
   const [searchTerm, setSearchTerm] = useState(''); // For bill name search
   const [reminderFrequency, setReminderFrequency] = useState('Daily');
   const [startingDate, setStartingDate] = useState('');
@@ -14,14 +14,11 @@ const ReminderSettings = () => {
   // Filter bills by category or search term
   const filteredBills = bills.filter(
     (bill) =>
-      (selectedCategory === '' || bill.category === selectedCategory) &&
-      bill.name && bill.name.toLowerCase().includes(searchTerm.toLowerCase())
+      
+      (bill.name && bill.name.toLowerCase().includes(searchTerm.toLowerCase()))
   );
   
 
-  const handleCategoryChange = (e) => {
-    setSelectedCategory(e.target.value);
-  };
 
   const handleSearchTermChange = (e) => {
     setSearchTerm(e.target.value);
@@ -30,7 +27,7 @@ const ReminderSettings = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const reminderDetails = {
-      category: selectedCategory,
+      
       reminderFrequency,
       startingDate,
       customMessage,
@@ -46,21 +43,7 @@ const ReminderSettings = () => {
     <div>
       <h2>Reminder Settings</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="category">Select Bill Category:</label>
-          <select
-            id="category"
-            value={selectedCategory}
-            onChange={handleCategoryChange}
-          >
-            <option value="">Select Category</option>
-            {bills.map((bill) => (
-              <option key={bill.id} value={bill.category}>
-                {bill.category}
-              </option>
-            ))}
-          </select>
-        </div>
+       
 
         <div>
           <label htmlFor="search">Search Bill by Name:</label>
