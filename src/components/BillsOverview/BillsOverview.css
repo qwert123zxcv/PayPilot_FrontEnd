@@ -1,0 +1,138 @@
+/* Glassy Effect for Bills Overview Page */
+.bills-overview-page {
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0)); /* Glassy gradient background */
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(10px); 
+    border-radius: 20px; /* More rounded corners */
+    border: 1px solid rgba(255, 255, 255, 0.18); /* Light border */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37); /* Shadow for depth */
+    position: relative; /* To position home icon */
+    background-color: rgba(255, 255, 255, 0.2); /* Slightly more transparent background */
+}
+
+/* Home Icon Positioning */
+.home-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.6); /* Light background for better visibility */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.home-icon .icon {
+    font-size: 1.5rem; /* Adjust icon size */
+}
+
+.home-icon .label {
+    display: none; /* Hide label for cleaner look */
+}
+
+/* Header Styling */
+.bills-overview-page h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #343a40;
+}
+
+/* Form Styling */
+form {
+    margin-bottom: 20px;
+}
+
+form div {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+select, input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background for inputs */
+}
+
+/* Align Submit button to the right */
+.submit-button-container {
+    text-align: right;
+}
+
+button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Error Message */
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+/* Table Styles */
+.bills-list table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.bills-list th, .bills-list td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.bills-list th {
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+.bills-list tr:hover {
+    background-color: #f1f3f5;
+}
+
+.bills-list tr td:first-child {
+    font-weight: bold;
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .bills-overview-page {
+        padding: 15px;
+    }
+
+    .bills-overview-page h1 {
+        font-size: 1.75rem;
+    }
+
+    .bills-list table, .bills-list th, .bills-list td {
+        font-size: 0.9rem;
+    }
+}
