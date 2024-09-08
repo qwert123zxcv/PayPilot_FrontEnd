@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { BillsContext } from '../../context/BillsContext';
 import { useNavigate } from 'react-router-dom';
 import './AddNewBill.css'; // Custom CSS for styling
+import { Link } from 'react-router-dom';
 
 const AddNewBill = () => {
   const { addBill } = useContext(BillsContext);  // Use the context
@@ -48,6 +49,12 @@ const AddNewBill = () => {
 
   return (
     <div className="add-new-bill-page">
+    <div className="home-icon">
+        <Link to="/manage-bills">
+          <div className="icon">🏠</div>
+          <div className="label">Home</div>
+        </Link>
+      </div>
       <h1>Add New Bill</h1>
       <form onSubmit={handleSubmit}>
         {/* Bill Form Fields */}
