@@ -1,0 +1,42 @@
+/* UpcomingPage.css */
+
+/* General button styles */
+.button {
+    background-color: #4CAF50; /* Green background */
+    border: none; /* Remove default border */
+    color: white; /* White text */
+    padding: 12px 24px; /* Padding for a better button size */
+    text-align: center; /* Center text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Makes the button inline-block */
+    font-size: 16px; /* Adjust font size */
+    margin: 0; /* Adds some margin to separate the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 8px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth transition */
+  }
+  
+  /* Flex container for centering the button */
+  .button-container {
+    display: flex;
+    justify-content: center; /* Centers the button horizontally */
+    margin-top: 0; /* Adds space between the select and the button */
+  }
+  
+  /* Hover effect for the button */
+  .button:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+  
+  /* Focus effect for accessibility */
+  /*button:focus {
+    outline: none; 
+    box-shadow: 0 0 5px 3px rgba(0, 128, 0, 0.4); 
+  }*/
+  
+  /* Disabled button styling */
+  /*button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }*/
+  
