@@ -24,16 +24,22 @@ const ManageBillsPage = () => {
           <div className="label">Reminder Settings</div>
         </Link>
       </div>
-      <div className="icon-button">
-        <Link to="/upcoming-overdue-bills" className="icon-link">
+    <div className="icon-button">
+     <Link to="/manage-bills/upcoming-overdue-bills" className="icon-link">
           <div className="icon">🔔</div>
           <div className="label">Upcoming/Overdue Bills</div>
         </Link>
       </div>
       <div className="icon-button">
-        <Link to="/snooze-mark-paid" className="icon-link">
+        <Link to="/manage-bills/snooze-mark-paid" className="icon-link">
           <div className="icon">🛠️</div>
           <div className="label">Snooze/Mark Paid Bills</div>
+        </Link>
+      </div>
+      <div className="icon-button">
+        <Link to="/manage-bills/update-or-delete-bill" className="icon-link">
+          <div className="icon">🛠️</div>
+          <div className="label">Update/Delete Bill</div>
         </Link>
       </div>
     </div>
