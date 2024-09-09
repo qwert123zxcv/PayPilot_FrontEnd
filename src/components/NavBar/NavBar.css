@@ -1,0 +1,93 @@
+/* Navbar container styling */
+.navbar {
+    background-color: #333;
+    padding: 10px 20px;
+  }
+  
+  /* Navbar list styling */
+  .navbar-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Navbar item styling */
+  .navbar-item {
+    margin: 0 15px;
+    position: relative;
+  }
+  
+  /* Navbar link styling */
+  .navbar-link {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    position: relative;
+    padding-bottom: 5px;
+    display: flex;
+    align-items: center; /* Aligns the text and emoji */
+    transition: color 0.3s;
+  }
+  
+  /* Pseudo-element for the underline */
+  .navbar-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #f4f4f4;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+  
+  /* On hover, animate the underline */
+  .navbar-link:hover::after {
+    transform: scaleX(1);
+  }
+  
+  /* On hover, change text color */
+  .navbar-link:hover {
+    color: #f4f4f4;
+  }
+  
+  /* Dropdown styles */
+  .dropdown {
+    position: relative;
+  }
+  
+  /* Dropdown menu */
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #333;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Dropdown link styling */
+  .dropdown-link {
+    display: block;
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  
+  /* Dropdown link hover effect */
+  .dropdown-link:hover {
+    background-color: #444;
+  }
+  
+  /* Show dropdown on hover */
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+  
