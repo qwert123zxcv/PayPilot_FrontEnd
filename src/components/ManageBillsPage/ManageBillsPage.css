@@ -31,8 +31,6 @@
     padding: 20px;
     border-radius: 12px;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1)); /* Glassy button background */
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.2); /* Light border for buttons */
     transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
