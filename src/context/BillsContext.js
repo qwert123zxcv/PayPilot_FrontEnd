@@ -18,9 +18,26 @@ export const BillsProvider = ({ children }) => {
       )
     );
   };
+  const updateBillDueDate = (updatedBills) => {
+    // setBills((prevBills) => [...prevBills, updatedBills]);
+    setBills(updatedBills);
+  };
+ // Function to delete a bill by its ID
+ const deleteBill = (billId) => {
+  setBills((prevBills) => prevBills.filter((bill) => bill.billId !== billId));
+};
+
+// Function to update a bill (you may have already implemented this)
+const updateBill = (billId, updatedDetails) => {
+  setBills((prevBills) =>
+    prevBills.map((bill) =>
+      bill.billId === billId ? { ...bill, ...updatedDetails } : bill
+    )
+  );
+};
 
   return (
-    <BillsContext.Provider value={{ bills, addBill, updateReminderSettings }}>
+    <BillsContext.Provider value={{ bills, addBill, updateReminderSettings, updateBillDueDate, deleteBill, updateBill }}>
       {children}
     </BillsContext.Provider>
   );
