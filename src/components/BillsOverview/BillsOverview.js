@@ -3,6 +3,15 @@ import { BillsContext } from '../../context/BillsContext';
 import { validateBillsOverviewForm } from './validation'; 
 import { useNavigate, Link } from 'react-router-dom';
 import './BillsOverview.css';  // Import custom CSS
+export const getStatus = (dueDate) => {
+    const today = new Date();
+    const billDate = new Date(dueDate);
+    if (billDate < today) {
+      return 'Pending';
+    }
+    return 'Upcoming';
+  };
+
 
 const BillsOverview = () => {
   const { bills } = useContext(BillsContext); 
@@ -13,15 +22,7 @@ const BillsOverview = () => {
   const [filteredBills, setFilteredBills] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const getStatus = (dueDate) => {
-    const today = new Date();
-    const billDate = new Date(dueDate);
-    if (billDate < today) {
-      return 'Pending';
-    }
-    return 'Upcoming';
-  };
-
+  
   const filterBills = () => {
     const fromDate = dateFrom ? new Date(dateFrom) : null;
     const toDate = dateTo ? new Date(dateTo) : null;
