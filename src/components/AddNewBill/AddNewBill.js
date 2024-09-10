@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { BillsContext } from '../../context/BillsContext';
 import { useNavigate } from 'react-router-dom';
-import './AddNewBill.css'; // Custom CSS for styling
-import { Link } from 'react-router-dom';
+import axios from 'axios';  // Import Axios for HTTP requests
+import './AddNewBill.css';  // Custom CSS for styling
 
 const AddNewBill = () => {
   const { addBill } = useContext(BillsContext);  // Use the context
@@ -15,6 +15,7 @@ const AddNewBill = () => {
   const [notes, setNotes] = useState('');
   const [isRecurring, setIsRecurring] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const handleFileChange = (e) => {
@@ -26,35 +27,58 @@ const AddNewBill = () => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const calculatePaymentStatus = (dueDate) => {
+    const today = new Date();
+    const due = new Date(dueDate);
 
+    if (due < today) {
+      return 'Pending';
+    } else if (due.getTime() === today.getTime()) {
+      return 'Upcoming';
+    } else {
+      return 'Upcoming';
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrorMessage(''); // Reset error message
+
+    // Calculate payment status based on due date
+    const paymentStatus = calculatePaymentStatus(dueDate);
+
+    // Create the new bill object to send to the backend
     const newBill = {
       billName,
       billCategory,
       dueDate,
       amount,
       reminderFrequency,
-      attachment,
       notes,
       isRecurring,
+      paymentStatus // Include paymentStatus in the request body
     };
 
-    addBill(newBill);  // Add the new bill to the context
-    setSuccessMessage('Bill has been successfully saved!');
-    
-    // Clear the form or navigate to another page if necessary
-    navigate('/manage-bills/bills-overview');  // Navigate to BillsOverview
+    try {
+      // Make POST request to your Spring Boot backend using Axios
+      const response = await axios.post('http://localhost:8080/bills', newBill, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      // If successful, show a success message
+      setSuccessMessage('Bill has been successfully saved!');
+      // Optionally navigate to another page after success
+      navigate('/manage-bills/bills-overview');
+    } catch (error) {
+      console.error('Error saving bill:', error);
+      setErrorMessage('An error occurred while saving the bill. Please try again.');
+    }
   };
 
   return (
     <div className="add-new-bill-page">
-    <div className="home-icon">
-        <Link to="/manage-bills">
-          <div className="icon">🏠</div>
-          <div className="label">Home</div>
-        </Link>
-      </div>
       <h1>Add New Bill</h1>
       <form onSubmit={handleSubmit}>
         {/* Bill Form Fields */}
@@ -155,9 +179,10 @@ const AddNewBill = () => {
         </div>
 
         <button type="submit">Save Bill</button>
-      </form>
 
-      {successMessage && <p className="success-message">{successMessage}</p>}
+        {successMessage && <p className="success-message">{successMessage}</p>}
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
+      </form>
     </div>
   );
 };

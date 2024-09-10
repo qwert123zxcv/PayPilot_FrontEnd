@@ -1,20 +1,20 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { BillsContext } from '../../context/BillsContext'; 
-import { validateBillsOverviewForm } from './validation'; 
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'; // Import axios
+import { validateBillsOverviewForm } from './validation';
 import { useNavigate, Link } from 'react-router-dom';
 import './BillsOverview.css';  // Import custom CSS
-export const getStatus = (dueDate) => {
-    const today = new Date();
-    const billDate = new Date(dueDate);
-    if (billDate < today) {
-      return 'Pending';
-    }
-    return 'Upcoming';
-  };
 
+export const getStatus = (dueDate) => {
+  const today = new Date();
+  const billDate = new Date(dueDate);
+  if (billDate < today) {
+    return 'Pending';
+  }
+  return 'Upcoming';
+};
 
 const BillsOverview = () => {
-  const { bills } = useContext(BillsContext); 
+  const [bills, setBills] = useState([]); // Manage state for bills
   const [category, setCategory] = useState('All');
   const [dateFrom, setDateFrom] = useState('');
   const [dateTo, setDateTo] = useState('');
@@ -22,14 +22,27 @@ const BillsOverview = () => {
   const [filteredBills, setFilteredBills] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
 
-  
+  // Fetch bills from backend
+  useEffect(() => {
+    const fetchBills = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/bills/all'); // Fetch bills from the API
+        setBills(response.data); // Set bills data
+      } catch (error) {
+        setErrorMessage('Failed to fetch bills.');
+      }
+    };
+
+    fetchBills();
+  }, []); // Empty dependency array to run once on component mount
+
   const filterBills = () => {
     const fromDate = dateFrom ? new Date(dateFrom) : null;
     const toDate = dateTo ? new Date(dateTo) : null;
 
     const filtered = bills.filter((bill) => {
       const billDate = new Date(bill.dueDate);
-      const isCategoryMatch = category === 'All' || bill.category === category;
+      const isCategoryMatch = category === 'All' || bill.billCategory === category;
       const isDateMatch = (!fromDate || billDate >= fromDate) && (!toDate || billDate <= toDate);
       const isStatusMatch = status === 'All' || getStatus(bill.dueDate) === status;
 
@@ -113,8 +126,8 @@ const BillsOverview = () => {
         {errorMessage && <p className="error-message">{errorMessage}</p>}
 
         <div className="submit-button-container">
-    <button type="submit">Submit</button>
-  </div>
+          <button type="submit">Submit</button>
+        </div>
       </form>
 
       <div className="bills-list">

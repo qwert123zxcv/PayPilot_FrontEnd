@@ -1,33 +1,32 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import axios from 'axios';
 import { BillsContext } from '../../context/BillsContext';
 
 const ReminderSettings = () => {
-  const { bills, updateReminderSettings } = useContext(BillsContext);
- 
+  const { bills } = useContext(BillsContext);
+  
   const [searchTerm, setSearchTerm] = useState(''); // For bill name search
   const [reminderFrequency, setReminderFrequency] = useState('Daily');
   const [startingDate, setStartingDate] = useState('');
   const [customMessage, setCustomMessage] = useState('');
   const [notificationPreference, setNotificationPreference] = useState('Mail');
   const [isRecurring, setIsRecurring] = useState(false);
+  const [filteredBills, setFilteredBills] = useState([]);
 
-  // Filter bills by category or search term
-  const filteredBills = bills.filter(
-    (bill) =>
-      
-      (bill.name && bill.name.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
-  
-
+  // Fetching all bills initially
+  useEffect(() => {
+    setFilteredBills(bills.filter(bill =>
+      bill.name && bill.name.toLowerCase().includes(searchTerm.toLowerCase())
+    ));
+  }, [bills, searchTerm]);
 
   const handleSearchTermChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const reminderDetails = {
-      
       reminderFrequency,
       startingDate,
       customMessage,
@@ -35,16 +34,18 @@ const ReminderSettings = () => {
       isRecurring,
     };
 
-    updateReminderSettings(reminderDetails); // Updating reminder settings in context
-    alert('Reminder settings updated!!');
+    try {
+      await axios.post('http://localhost:8080/reminder-settings', reminderDetails);
+      alert('Reminder settings updated successfully!');
+    } catch (error) {
+      console.error('There was an error updating the reminder settings!', error);
+    }
   };
 
   return (
     <div>
       <h2>Reminder Settings</h2>
       <form onSubmit={handleSubmit}>
-       
-
         <div>
           <label htmlFor="search">Search Bill by Name:</label>
           <input
