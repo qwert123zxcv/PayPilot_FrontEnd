@@ -47,23 +47,26 @@ const AddNewBill = () => {
     // Calculate payment status based on due date
     const paymentStatus = calculatePaymentStatus(dueDate);
 
-    // Create the new bill object to send to the backend
-    const newBill = {
-      billName,
-      billCategory,
-      dueDate,
-      amount,
-      reminderFrequency,
-      notes,
-      isRecurring,
-      paymentStatus // Include paymentStatus in the request body
-    };
+    // Create a FormData object to handle file uploads
+    const formData = new FormData();
+    formData.append('billName', billName);
+    formData.append('billCategory', billCategory);
+    formData.append('dueDate', dueDate);
+    formData.append('amount', amount);
+    formData.append('reminderFrequency', reminderFrequency);
+    formData.append('notes', notes);
+    formData.append('isRecurring', isRecurring);
+    formData.append('paymentStatus', paymentStatus);
+
+    if (attachment) {
+      formData.append('attachment', attachment);
+    }
 
     try {
       // Make POST request to your Spring Boot backend using Axios
-      const response = await axios.post('http://localhost:8080/bills', newBill, {
+      const response = await axios.post('http://localhost:8080/bills', formData, {
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'multipart/form-data',
         },
       });
 
