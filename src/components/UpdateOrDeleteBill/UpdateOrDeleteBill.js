@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { BillsContext } from '../../context/BillsContext';
+import './UpdateOrDeleteBill.css'
 import { useNavigate } from 'react-router-dom';
 
 const UpdateOrDeleteBill = () => {
