@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';  // Import Axios for HTTP requests
 import './AddNewBill.css';  // Custom CSS for styling
 
+
 const AddNewBill = () => {
   const { addBill } = useContext(BillsContext);  // Use the context
   const [billName, setBillName] = useState('');
@@ -16,6 +17,7 @@ const AddNewBill = () => {
   const [isRecurring, setIsRecurring] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+
   const navigate = useNavigate();
 
   const handleFileChange = (e) => {
@@ -61,6 +63,7 @@ const AddNewBill = () => {
     if (attachment) {
       formData.append('attachment', attachment);
     }
+
 
     try {
       // Make POST request to your Spring Boot backend using Axios
